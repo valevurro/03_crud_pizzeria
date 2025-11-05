@@ -4,3 +4,5 @@ function longTime(req, res, next) {
     console.log('[${now}] Got a new request for url: ${req.url} - method $(req.method');
     next();
 }
+
+module.exports = longTime
