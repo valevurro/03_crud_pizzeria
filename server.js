@@ -15,7 +15,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/api', logTime);
+app.use('/api', longTime);
 
 
 
