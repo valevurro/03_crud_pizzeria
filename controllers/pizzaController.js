@@ -11,9 +11,11 @@ function index(req, res) {
         if(err) return res.status(500).json({error: err.message})
         console.log(err);
         console.log(result);
+        res.json('Show all pizzas');
+
     })
 
-    res.json('Show all pizzas');
+    
 
     // let filtered_menu = menu;
 
@@ -32,15 +34,29 @@ function show(req, res) {
     const { id } = req.params;
     console.log(id);
 
-    const pizza = menu.find(item => item.id === parseInt(id));
-    console.log(pizza);
+    const sql = 'SELECT * FROM pizzas WHERE id = ?'
+    console.log(sql);
+    connection.query(sql, [id], (err, results) => {
+        console.log(err);
+        console.log(results);
 
-    if (!pizza) {
+        const pizzaObj = results[0]
+        console.log(pizzaObj);
 
-        return res.status(404).json({ error: 'Pizza not found', message: 'Resource not found' });
-    }
+        res.json(pizzaObj)
+    })
+    
+    
 
-    res.json(pizza);
+    // const pizza = menu.find(item => item.id === parseInt(id));
+    // console.log(pizza);
+
+    // if (!pizza) {
+
+    //     return res.status(404).json({ error: 'Pizza not found', message: 'Resource not found' });
+    // }
+
+    // res.json(pizza);
 }
 
 //store
